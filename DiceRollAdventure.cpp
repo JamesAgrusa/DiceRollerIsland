@@ -78,6 +78,7 @@ string gameInstructions()
 
 string rollCheck()
 {
+	// this is me trying to decide comparison values rolled, then how to get the damage to be dealt. 
 	Player player;
 	Slime slime;
 	
@@ -111,14 +112,16 @@ string rollCheck()
 
 void battlePractice()
 {
+	// the first battle sequence in the game, where the player will battle a slime
+
 	Player player;
 	Slime slime;
 	cout << "a wild slime has appeared!" << endl;
 	// do 
 	// {
 		player.playerRoll();
-		// rollCheck();
 		slime.slimeRoll();
+		// rollCheck();
 	// } while (player.health > 0 || slime.health > 0);
 }
 
@@ -130,10 +133,11 @@ Player::Player()
 
 string Player::playerRoll()
 {
+	// definine standard six sided die and the random roll function for battle to be used here
 	string playerDiceRoll;
-	string side[] = { "one", "two", "three", "four", "five", "six" };
+	string side[] = { "one", "two", "three", "four", "five", "six", "roll again"};
 	srand((unsigned int)time(NULL));
-	playerDiceRoll = side[rand() % 6];
+	playerDiceRoll = side[rand() % 7];
 	cout << "Player rolled: " << playerDiceRoll << endl;
 	return playerDiceRoll;
 }
@@ -145,10 +149,11 @@ Slime::Slime()
 
 string Slime::slimeRoll()
 {
+	// will only give the option of rolling one so player can win their first battle!! well, hopefully xD
 	string slimeDiceRoll;
-	string side[] = { "one", "two", "three", "four", "five", "six" };
+	string side[] = { "one" };
 	srand((unsigned int)time(NULL));
-	slimeDiceRoll = side[rand() % 6];
+	slimeDiceRoll = side[rand() % 1];
 	cout << "Slime rolled: " << slimeDiceRoll << endl;
 	return slimeDiceRoll;
 }
