@@ -7,16 +7,21 @@
 
 using namespace std;
 
-void gameIntro();
-string gameInstructions();
-void runGame();
-void battlePractice();
-string rollCheck();
+class Game
+{
+public:
+	void gameIntro();
+	string gameInstructions();
+	void runGame();
+	void battlePractice();
+	string rollCheck();
+};
 
 class Player
 {
 public:
 	float health = 50;
+	float playerDamage{};
 	string playerDiceRoll;
 
 	Player();
@@ -28,6 +33,7 @@ class Slime
 {
 public:
 	float health = 10;
+	float slimeDamage{};
 	string slimeDiceRoll;
 
 	Slime();
@@ -37,10 +43,18 @@ public:
 
 int main()
 {
-	runGame();
+	Game game;
+
+	game.runGame();
 }
 
-void gameIntro()
+void Game::runGame()
+{
+	gameIntro();
+	gameInstructions();
+}
+
+void Game::gameIntro()
 {
 	cout << "Wizard: Oh...I see, you are finally awake...\nYou have been sleeping for 3 weeks now." << endl;
 	cout << "" << endl;
@@ -51,14 +65,14 @@ void gameIntro()
 	cout << "If you defeat this dragon you will instantly be sent to a place of your choosing!" << endl;
 }
 
-string gameInstructions()
+string Game::gameInstructions()
 {
 	string choice;
 	cout << "" << endl;
 	cout << "First, here are the settings of each number on the dice..." << endl;
 	cout << "1: 10 attack\n2: no attack\n3: 20 attack\n4: instant win\n5: 30 attack\n6: 10 attack\n";
 	cout << "" << endl;
-	cout << "Each attacker will have 50 HP at the start of each fight, and you will regain your health if you win your battle!" << endl;
+	cout << "You will gain more HP with each creature you defeat in battle. You will Start with 50." << endl;
 	cout << "Are you ready to practice your first fight?\nYes or No" << endl;
 	cin >> choice;
 	if (choice == "Yes")
@@ -76,7 +90,7 @@ string gameInstructions()
 	return choice;
 }
 
-string rollCheck()
+string Game::rollCheck()
 {
 	// this is me trying to decide comparison values rolled, then how to get the damage to be dealt. 
 	Player player;
@@ -110,19 +124,22 @@ string rollCheck()
 	return RollCheck;
 }
 
-void battlePractice()
+void Game::battlePractice()
 {
+	string choice;
 	// the first battle sequence in the game, where the player will battle a slime
 
 	Player player;
 	Slime slime;
-	cout << "a wild slime has appeared!" << endl;
-	// do 
-	// {
-		player.playerRoll();
-		slime.slimeRoll();
-		// rollCheck();
-	// } while (player.health > 0 || slime.health > 0);
+	cout << "" << endl;
+	cout << "A wild slime has appeared!" << endl;
+	cout << "And it wants to attack you! Brace yourself" << endl;
+	cout << "" << endl;
+	player.playerRoll();
+	slime.slimeRoll();
+	// need a slimeDamage = playerDiceRoll - (slimeHealth/playerDiceRoll) and vise verca for the playerDamage from slime.
+	//slimeHealth = slimeHealth - slimeDamage to calculate current health of slime
+	
 }
 
 Player::Player()
@@ -158,8 +175,3 @@ string Slime::slimeRoll()
 	return slimeDiceRoll;
 }
 
-void runGame()
-{
-	gameIntro();
-	gameInstructions();
-}
