@@ -21,7 +21,7 @@ public:
 
 	Player();
 
-	void playerRoll();
+	string playerRoll();
 };
 
 class Slime
@@ -32,7 +32,7 @@ public:
 
 	Slime();
 
-	void slimeRoll();
+	string slimeRoll();
 };
 
 int main()
@@ -114,12 +114,12 @@ void battlePractice()
 	Player player;
 	Slime slime;
 	cout << "a wild slime has appeared!" << endl;
-	while (player.health > 0 || slime.health > 0)
-	{
+	// do 
+	// {
 		player.playerRoll();
-		rollCheck();
+		// rollCheck();
 		slime.slimeRoll();
-	}
+	// } while (player.health > 0 || slime.health > 0);
 }
 
 Player::Player()
@@ -128,13 +128,14 @@ Player::Player()
 }
 
 
-void Player::playerRoll()
+string Player::playerRoll()
 {
 	string playerDiceRoll;
 	string side[] = { "one", "two", "three", "four", "five", "six" };
 	srand((unsigned int)time(NULL));
 	playerDiceRoll = side[rand() % 6];
 	cout << "Player rolled: " << playerDiceRoll << endl;
+	return playerDiceRoll;
 }
 
 Slime::Slime()
@@ -142,13 +143,14 @@ Slime::Slime()
 
 }
 
-void Slime::slimeRoll()
+string Slime::slimeRoll()
 {
 	string slimeDiceRoll;
 	string side[] = { "one", "two", "three", "four", "five", "six" };
 	srand((unsigned int)time(NULL));
 	slimeDiceRoll = side[rand() % 6];
-	cout << "Player rolled: " << slimeDiceRoll << endl;
+	cout << "Slime rolled: " << slimeDiceRoll << endl;
+	return slimeDiceRoll;
 }
 
 void runGame()
