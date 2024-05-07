@@ -1,0 +1,1 @@
+Here, I am just kind of winging it, I am trying to make a dice rolling adventure built all on chance of winning with the roll of a dice. There will be a few monsters to defeat once i figure out the combat system. Enjoy the creation journey!! Something to focus on, that is my own while i learn various Unreal Engine courses. 
