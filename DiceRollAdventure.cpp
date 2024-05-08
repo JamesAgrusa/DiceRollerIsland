@@ -1,8 +1,17 @@
 // dice roll adventure
+// codingrabbi
+
+//Figure out battle sequence
+//figure out how many creatures to battle
+//+ how much per creature victory for battle points
+// dragon in castle at end of fighting avenue
+// figure out a more compiled form of battle? we will see how lengthy this gets!
+// update numbers from string to floats or ints!
 
 #include <iostream>
 #include <ctime>
 #include <string>
+#include <cstdlib>
 
 
 using namespace std;
@@ -14,7 +23,6 @@ public:
 	string gameInstructions();
 	void runGame();
 	void battlePractice();
-	string rollCheck();
 };
 
 class Player
@@ -90,39 +98,6 @@ string Game::gameInstructions()
 	return choice;
 }
 
-string Game::rollCheck()
-{
-	// this is me trying to decide comparison values rolled, then how to get the damage to be dealt. 
-	Player player;
-	Slime slime;
-	
-	string RollCheck;
-	if (player.playerDiceRoll == "one")
-	{
-		cout << "You did 10 damage" << endl;
-	}
-	if (player.playerDiceRoll == "two")
-	{
-		cout << "You did 10 damage" << endl;
-	}
-	if (player.playerDiceRoll == "three")
-	{
-		cout << "You did 10 damage" << endl;
-	}
-	if (player.playerDiceRoll == "four")
-	{
-		cout << "You did 10 damage" << endl;
-	}
-	if (player.playerDiceRoll == "five")
-	{
-		cout << "You did 10 damage" << endl;
-	}
-	if (player.playerDiceRoll == "six")
-	{
-		cout << "You did 10 damage" << endl;
-	}
-	return RollCheck;
-}
 
 void Game::battlePractice()
 {
@@ -139,6 +114,8 @@ void Game::battlePractice()
 	slime.slimeRoll();
 	// need a slimeDamage = playerDiceRoll - (slimeHealth/playerDiceRoll) and vise verca for the playerDamage from slime.
 	//slimeHealth = slimeHealth - slimeDamage to calculate current health of slime
+	slime.slimeDamage = player.playerDiceRoll - slime.health;
+
 	
 }
 
