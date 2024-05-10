@@ -23,6 +23,7 @@ public:
 	string gameInstructions();
 	void runGame();
 	void battlePractice();
+	
 };
 
 class Player
@@ -111,13 +112,51 @@ void Game::battlePractice()
 	cout << "And it wants to attack you! Brace yourself" << endl;
 	cout << "" << endl;
 	player.playerRoll();
-	slime.slimeRoll();
+	
 	// need a slimeDamage = playerDiceRoll - (slimeHealth/playerDiceRoll) and vise verca for the playerDamage from slime.
 	//slimeHealth = slimeHealth - slimeDamage to calculate current health of slime
-	slime.slimeDamage = player.playerDiceRoll - slime.health;
+	// switch case here? but make the switch case its own function to plug into all the battles!
+	switch(player.playerDiceRoll)
+	{
+		case 1:
+		if (player.playerDiceRoll = "one")
+		{
+			cout << "Player dealt 10 damage to opponent!" << endl;
+		}
+		break;
+		else if (player.playerDiceRoll = "one")
+		{
+			cout << "Player dealt 10 damage to opponent!" << endl;
+		}
+		break;
+		else if (player.playerDiceRoll = "one")
+		{
+			cout << "Player dealt 10 damage to opponent!" << endl;
+		}
+		break;
+		else if (player.playerDiceRoll = "one")
+		{
+			cout << "Player dealt 10 damage to opponent!" << endl;
+		}
+		break;
+		else if (player.playerDiceRoll = "one")
+		{
+			cout << "Player dealt 10 damage to opponent!" << endl;
+		}
+		break;
+		else if (player.playerDiceRoll = "one")
+		{
+			cout << "Player dealt 10 damage to opponent!" << endl;
+		}
+		break;
 
-	
+
+	}
+	slime.slimeRoll();
+	slime.slimeDamage = player.playerDiceRoll - slime.health;	
 }
+
+
 
 Player::Player()
 {
