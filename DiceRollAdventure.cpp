@@ -79,7 +79,7 @@ string Game::gameInstructions()
 	string choice;
 	cout << "" << endl;
 	cout << "First, here are the settings of each number on the dice..." << endl;
-	cout << "1: 10 attack\n2: no attack\n3: 20 attack\n4: instant win\n5: 30 attack\n6: 10 attack\n";
+	cout << "1: 10 damage\n2: no damage\n3: 20 damage\n4: instant win\n5: 30 damage\n6: 10 damage\n";
 	cout << "" << endl;
 	cout << "You will gain more HP with each creature you defeat in battle. You will Start with 50." << endl;
 	cout << "Are you ready to practice your first fight?\nYes or No" << endl;
@@ -99,79 +99,78 @@ string Game::gameInstructions()
 	return choice;
 }
 
-
 void Game::battlePractice()
 {
-	string choice;
 	// the first battle sequence in the game, where the player will battle a slime
+	// need a slimeDamage = playerDiceRoll - (slimeHealth/playerDiceRoll) and vise verca for the playerDamage from slime.
+	//slimeHealth = slimeHealth - slimeDamage to calculate current health of slime
+	// switch case here? but make the switch case its own function to plug into all the battles!
+	// slime.slimeDamage = player.playerDiceRoll - slime.health;
 
 	Player player;
 	Slime slime;
+
+	player.health = 50;
+	slime.health = 10;
+	string choice;
+	
 	cout << "" << endl;
 	cout << "A wild slime has appeared!" << endl;
 	cout << "And it wants to attack you! Brace yourself" << endl;
 	cout << "" << endl;
-	player.playerRoll();
-	
-	// need a slimeDamage = playerDiceRoll - (slimeHealth/playerDiceRoll) and vise verca for the playerDamage from slime.
-	//slimeHealth = slimeHealth - slimeDamage to calculate current health of slime
-	// switch case here? but make the switch case its own function to plug into all the battles!
-	switch(player.playerDiceRoll)
+	cout << "Player has: " << player.health << " health left" << endl;
+	cout << "Slime has: " << slime.health << " health left" << endl;
+
+	while (player.health > 0 || slime.health > 0)
 	{
-		case 1:
-		if (player.playerDiceRoll = "one")
-		{
-			cout << "Player dealt 10 damage to opponent!" << endl;
-		}
-		break;
-		else if (player.playerDiceRoll = "one")
-		{
-			cout << "Player dealt 10 damage to opponent!" << endl;
-		}
-		break;
-		else if (player.playerDiceRoll = "one")
-		{
-			cout << "Player dealt 10 damage to opponent!" << endl;
-		}
-		break;
-		else if (player.playerDiceRoll = "one")
-		{
-			cout << "Player dealt 10 damage to opponent!" << endl;
-		}
-		break;
-		else if (player.playerDiceRoll = "one")
-		{
-			cout << "Player dealt 10 damage to opponent!" << endl;
-		}
-		break;
-		else if (player.playerDiceRoll = "one")
-		{
-			cout << "Player dealt 10 damage to opponent!" << endl;
-		}
-		break;
-
-
+		player.playerRoll();
+		slime.slimeRoll();	
+		// slime.slimeDamage = player.playerDiceRoll;
 	}
-	slime.slimeRoll();
-	slime.slimeDamage = player.playerDiceRoll - slime.health;	
 }
-
-
 
 Player::Player()
 {
 
 }
 
-
 string Player::playerRoll()
 {
 	// definine standard six sided die and the random roll function for battle to be used here
+	Player player;
 	string playerDiceRoll;
 	string side[] = { "one", "two", "three", "four", "five", "six", "roll again"};
 	srand((unsigned int)time(NULL));
 	playerDiceRoll = side[rand() % 7];
 	cout << "Player rolled: " << playerDiceRoll << endl;
+	if (playerDiceRoll == "one")
+	{
+		cout << "You have dealt 10 damage" << endl;
+	}
+	else if (playerDiceRoll == "two")
+	{
+		cout << "You have dealt NO damage" << endl;
+	}
+	else if (playerDiceRoll == "three")
+	{
+		cout << "You have dealt 20 damage" << endl;
+	}
+	else if (playerDiceRoll == "four")
+	{
+		cout << "You have won Instantly" << endl;
+	}
+	else if (playerDiceRoll == "five")
+	{
+		cout << "You have dealt 30 damage" << endl;
+	}
+	else if (playerDiceRoll == "six")
+	{
+		cout << "You have dealt 10 damage" << endl;
+	}
+	else if (playerDiceRoll == "roll again")
+	{
+		cout << "You need to roll again! Sorry! Comeback seasson is here though" << endl;
+	}
 	return playerDiceRoll;
 }
 
@@ -188,6 +187,10 @@ string Slime::slimeRoll()
 	srand((unsigned int)time(NULL));
 	slimeDiceRoll = side[rand() % 1];
 	cout << "Slime rolled: " << slimeDiceRoll << endl;
+	if (slimeDiceRoll == "one")
+	{
+		cout << "The slime has dealt 10 damage" << endl;
+	}
 	return slimeDiceRoll;
 }
 
