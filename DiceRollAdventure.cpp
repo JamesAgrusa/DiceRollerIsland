@@ -32,6 +32,7 @@ public:
 	float health = 50;
 	float playerDamage{};
 	string playerDiceRoll;
+	float diceRollDamage{};
 
 	Player();
 
@@ -44,6 +45,7 @@ public:
 	float health = 10;
 	float slimeDamage{};
 	string slimeDiceRoll;
+	float diceRollDamage{10};
 
 	Slime();
 
@@ -120,13 +122,17 @@ void Game::battlePractice()
 	cout << "" << endl;
 	cout << "Player has: " << player.health << " health left" << endl;
 	cout << "Slime has: " << slime.health << " health left" << endl;
+	cout << "" << endl;
 
-	while (player.health > 0 || slime.health > 0)
-	{
+	// while (player.health > 0 || slime.health > 0)
+	// {
 		player.playerRoll();
 		slime.slimeRoll();	
-		// slime.slimeDamage = player.playerDiceRoll;
-	}
+		slime.slimeDamage = slime.health - player.diceRollDamage;
+		player.playerDamage = player.health - slime.diceRollDamage;
+		cout << "Slime took damage and now has " << slime.slimeDamage << " health left" << endl;
+		cout << "Player took damage and now has " << player.playerDamage << " health left " << endl;
+	// }
 }
 
 Player::Player()
@@ -146,6 +152,7 @@ string Player::playerRoll()
 	if (playerDiceRoll == "one")
 	{
 		cout << "You have dealt 10 damage" << endl;
+		player.diceRollDamage = 10;
 	}
 	else if (playerDiceRoll == "two")
 	{
@@ -154,6 +161,7 @@ string Player::playerRoll()
 	else if (playerDiceRoll == "three")
 	{
 		cout << "You have dealt 20 damage" << endl;
+		player.diceRollDamage = 20;
 	}
 	else if (playerDiceRoll == "four")
 	{
@@ -162,10 +170,12 @@ string Player::playerRoll()
 	else if (playerDiceRoll == "five")
 	{
 		cout << "You have dealt 30 damage" << endl;
+		player.diceRollDamage = 30;
 	}
 	else if (playerDiceRoll == "six")
 	{
 		cout << "You have dealt 10 damage" << endl;
+		player.diceRollDamage = 10;
 	}
 	else if (playerDiceRoll == "roll again")
 	{
