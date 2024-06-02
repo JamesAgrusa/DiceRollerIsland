@@ -23,6 +23,7 @@ public:
 	string gameInstructions();
 	void runGame();
 	void battlePractice();
+	string battlePracticeComplete();
 	
 };
 
@@ -81,10 +82,11 @@ string Game::gameInstructions()
 	string choice;
 	cout << "" << endl;
 	cout << "First, here are the settings of each number on the dice..." << endl;
-	cout << "1: 10 damage\n2: no damage\n3: 20 damage\n4: instant win\n5: 30 damage\n6: 10 damage\n";
+	cout << "1: 10 damage\n2: no damage\n3: 20 damage\n4: instant win\n5: 30 damage\n6: 10 damage\n7: Your Dice could land on its corner standing up, and youll need to roll again!\n";
 	cout << "" << endl;
 	cout << "You will gain more HP with each creature you defeat in battle. You will Start with 50." << endl;
 	cout << "Are you ready to practice your first fight?\nYes or No" << endl;
+	cout << "" << endl;
 	cin >> choice;
 	if (choice == "Yes")
 	{
@@ -92,7 +94,8 @@ string Game::gameInstructions()
 	}
 	else if (choice == "No")
 	{
-		cout << "Boo, you whore." << endl;
+		std::cout << "Boo, you whore." << endl;
+		gameInstructions();
 	}
 	else
 	{
@@ -105,7 +108,7 @@ void Game::battlePractice()
 {
 	// the first battle sequence in the game, where the player will battle a slime
 	// need a slimeDamage = playerDiceRoll - (slimeHealth/playerDiceRoll) and vise verca for the playerDamage from slime.
-	//slimeHealth = slimeHealth - slimeDamage to calculate current health of slime
+	// slimeHealth = slimeHealth - slimeDamage to calculate current health of slime
 	// switch case here? but make the switch case its own function to plug into all the battles!
 	// slime.slimeDamage = player.playerDiceRoll - slime.health;
 
@@ -114,26 +117,75 @@ void Game::battlePractice()
 
 	player.health = 50;
 	slime.health = 10;
-	string choice;
+	
 	
 	cout << "" << endl;
 	cout << "A wild slime has appeared!" << endl;
-	cout << "And it wants to attack you! Brace yourself" << endl;
-	cout << "" << endl;
-	cout << "Player has: " << player.health << " health left" << endl;
-	cout << "Slime has: " << slime.health << " health left" << endl;
+	cout << "And is going to attack you! You toss your die in preperation!" << endl;
 	cout << "" << endl;
 
-	// while (player.health > 0 || slime.health > 0)
+	// do
 	// {
+		cout << "Slime has: " << slime.health << " hp to start" << endl;
+		cout << "Player has: " << player.health << " hp to start." << endl;
+		cout << "" << endl;
 		player.playerRoll();
-		slime.slimeRoll();	
+		slime.slimeRoll();
 		slime.slimeDamage = slime.health - player.diceRollDamage;
+		if (slime.slimeDamage < 0)
+		{
+			slime.slimeDamage = 0;
+		}
+		slime.health = slime.health - slime.slimeDamage;
 		player.playerDamage = player.health - slime.diceRollDamage;
+		if (player.playerDamage < 0)
+		{
+			player.playerDamage = 0;
+		}
+		player.health = player.health - player.playerDamage;
+		cin.get();
 		cout << "Slime took damage and now has " << slime.slimeDamage << " health left" << endl;
 		cout << "Player took damage and now has " << player.playerDamage << " health left " << endl;
-	// }
+		cout << "" << endl;
+		cout << "Slime now has: " << slime.health << " left" << endl;
+		cout << "Player now has: " << player.health << " left" << endl;
+		cout << "" << endl;
+
+		if (slime.health < 1)
+		{
+			cout << "slime has died, holy shit, good job" << endl;
+			cout << "On to your next adventure!!" << endl;
+			battlePracticeComplete();
+		}
+		else if (player.health < 1)
+		{
+			cout << "you tried young warrior, if you cant handle the slime, you need to train more." << endl;
+			battlePractice();
+		}
+	// } while (player.health > 0 || slime.health > 0);
 }
+
+string Game::battlePracticeComplete()
+{
+	string choice;
+	cout << "you have defeated the slime, now you have gained 10 HP!! not it is time to move on to bigger and better things" << endl;
+	cout << "Are you ready to leave safety and venture into the unknown?" << endl;
+	cin >> choice;
+	if (choice == "yes")
+	{
+
+	}
+	else if (choice == "no")
+	{
+
+	}
+	else
+	{
+
+	}
+	return choice;
+}
+	
 
 Player::Player()
 {
@@ -153,33 +205,40 @@ string Player::playerRoll()
 	{
 		cout << "You have dealt 10 damage" << endl;
 		player.diceRollDamage = 10;
+		cout << "" << endl;
 	}
 	else if (playerDiceRoll == "two")
 	{
 		cout << "You have dealt NO damage" << endl;
+		cout << "" << endl;
 	}
 	else if (playerDiceRoll == "three")
 	{
 		cout << "You have dealt 20 damage" << endl;
 		player.diceRollDamage = 20;
+		cout << "" << endl;
 	}
 	else if (playerDiceRoll == "four")
 	{
 		cout << "You have won Instantly" << endl;
+		cout << "" << endl;
 	}
 	else if (playerDiceRoll == "five")
 	{
 		cout << "You have dealt 30 damage" << endl;
 		player.diceRollDamage = 30;
+		cout << "" << endl;
 	}
 	else if (playerDiceRoll == "six")
 	{
 		cout << "You have dealt 10 damage" << endl;
 		player.diceRollDamage = 10;
+		cout << "" << endl;
 	}
 	else if (playerDiceRoll == "roll again")
 	{
 		cout << "You need to roll again! Sorry! Comeback seasson is here though" << endl;
+		cout << "" << endl;
 	}
 	return playerDiceRoll;
 }
@@ -200,7 +259,7 @@ string Slime::slimeRoll()
 	if (slimeDiceRoll == "one")
 	{
 		cout << "The slime has dealt 10 damage" << endl;
+		cout << "" << endl;
 	}
 	return slimeDiceRoll;
 }
-
