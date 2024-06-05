@@ -24,6 +24,7 @@ public:
 	void runGame();
 	void battlePractice();
 	string battlePracticeComplete();
+	void nextBattle();
 	
 };
 
@@ -144,17 +145,18 @@ void Game::battlePractice()
 		}
 		player.health = player.health - player.playerDamage;
 		cin.get();
-		cout << "Slime took damage and now has " << slime.slimeDamage << " health left" << endl;
-		cout << "Player took damage and now has " << player.playerDamage << " health left " << endl;
-		cout << "" << endl;
-		cout << "Slime now has: " << slime.health << " left" << endl;
-		cout << "Player now has: " << player.health << " left" << endl;
-		cout << "" << endl;
+		// cout << "Slime took damage and now has " << slime.slimeDamage << " health left" << endl;
+		// cout << "Player took damage and now has " << player.playerDamage << " health left " << endl;
+		// cout << "" << endl;
+		// cout << "Slime now has: " << slime.health << " left" << endl;
+		// cout << "Player now has: " << player.health << " left" << endl;
+		// cout << "" << endl;
 
 		if (slime.health < 1)
 		{
 			cout << "slime has died, holy shit, good job" << endl;
 			cout << "On to your next adventure!!" << endl;
+			cout << "" << endl;
 			battlePracticeComplete();
 		}
 		else if (player.health < 1)
@@ -169,21 +171,29 @@ string Game::battlePracticeComplete()
 {
 	string choice;
 	cout << "you have defeated the slime, now you have gained 10 HP!! not it is time to move on to bigger and better things" << endl;
-	cout << "Are you ready to leave safety and venture into the unknown?" << endl;
+	cout << "Are you ready to leave safety and venture into the unknown?\n\nYes or No\n" << endl;
 	cin >> choice;
-	if (choice == "yes")
+	if (choice == "Yes")
 	{
-
+		nextBattle();
 	}
-	else if (choice == "no")
+	else if (choice == "No")
 	{
-
+		cout << "Why not? You just kicked the shit out of that slime!" << endl;
+		battlePracticeComplete();
 	}
 	else
 	{
 
 	}
 	return choice;
+}
+
+void Game::nextBattle()
+{
+	cout << "" << endl;
+	cout << "You open the doors and the bright sun pours into where you were just attacked...it smells nice" << endl;
+	cout << "You get an overwhelming sense of adventure in your head" << endl;
 }
 	
 
